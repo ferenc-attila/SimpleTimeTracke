@@ -16,12 +16,18 @@ public class Activity {
 
     @Override
     public String toString() {
-        return "Id.: " + identifier + "\n" +
-                ", category=" + category +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", notes='" + notes + '\'' +
-                '}';
+        StringBuilder activityString = new StringBuilder();
+        activityString.append("Id: ");
+        activityString.append(identifier);
+        activityString.append("\nKategória: ");
+        activityString.append(category.getName());
+        activityString.append("\nNév: ");
+        activityString.append(name);
+        activityString.append("\nLeírás: ");
+        activityString.append(description);
+        activityString.append("\nMegjegyzés: ");
+        activityString.append(notes);
+        return activityString.toString();
     }
 
     public int getIdentifier() {
