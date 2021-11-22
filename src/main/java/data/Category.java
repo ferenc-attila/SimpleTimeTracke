@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Category {
@@ -8,7 +9,7 @@ public class Category {
     private String name;
     private String description;
     private String notes;
-    private List<Activity> activities;
+    private List<Activity> activities = new ArrayList<>();
 
     public Category(int identifier, String name) {
         this.identifier = identifier;

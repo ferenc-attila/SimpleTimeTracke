@@ -11,6 +11,7 @@ public class Activity {
     public Activity(int identifier, Category category, String name) {
         this.identifier = identifier;
         this.category = category;
+        category.addActivity(this);
         this.name = name;
     }
 
