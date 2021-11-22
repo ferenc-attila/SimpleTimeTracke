@@ -22,18 +22,16 @@ public class Category {
 
     @Override
     public String toString() {
-        StringBuilder categoryString = new StringBuilder();
-        categoryString.append("Id: ");
-        categoryString.append(identifier);
-        categoryString.append("\nKategória: ");
-        categoryString.append(name);
-        categoryString.append("\nLeírás: ");
-        categoryString.append(description);
-        categoryString.append("\nMegjegyzés: ");
-        categoryString.append(notes);
-        categoryString.append("\nAktivitások: ");
-        categoryString.append(listActivities());
-        return categoryString.toString();
+        return "Id: " +
+                identifier +
+                "\nKategória: " +
+                name +
+                "\nLeírás: " +
+                description +
+                "\nMegjegyzés: " +
+                notes +
+                "\nAktivitások: " +
+                listActivities();
     }
 
     private String listActivities() {

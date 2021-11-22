@@ -2,9 +2,7 @@ package data;
 
 import org.junit.jupiter.api.Test;
 
-import javax.xml.stream.FactoryConfigurationError;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CategoryTest {
 
@@ -31,11 +29,12 @@ class CategoryTest {
     void toStringTest() {
         work.setDescription("Munkahelyi tevékenységek");
         work.setNotes("Főállású munkahely");
-        String workString = "Id: 1\n" +
-                "Kategória: Work\n" +
-                "Leírás: Munkahelyi tevékenységek\n" +
-                "Megjegyzés: Főállású munkahely\n" +
-                "Aktivitások: administration, Commute to work";
+        String workString = """
+                Id: 1
+                Kategória: Work
+                Leírás: Munkahelyi tevékenységek
+                Megjegyzés: Főállású munkahely
+                Aktivitások: administration, Commute to work""";
         assertEquals(workString, work.toString());
     }
 
