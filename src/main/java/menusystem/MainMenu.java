@@ -6,10 +6,8 @@ public class MainMenu {
 
     private final String[] mainMenu = {"\n*** Simple Time Tracker ***\n",
             "Háttéradatok karbantartása",
-            "Aktivitás indítása",
-            "Aktivitás leállítása",
-            "Adatok exportálása",
-            "Adatok importálása",
+            "Aktivitás indítása/leállítása",
+            "Adatok exportálása/importálása",
             "Kilépés"};
 
     Scanner scanner = new Scanner(System.in);
