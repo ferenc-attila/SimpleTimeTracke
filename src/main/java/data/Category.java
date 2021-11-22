@@ -17,7 +17,7 @@ public class Category {
     }
 
     public void addActivity(Activity activity) {
-        activities.add(activity);
+        this.activities.add(activity);
     }
 
     public void removeActivity(Activity activity) {
