@@ -26,6 +26,13 @@ class CategoryTest {
     }
 
     @Test
+    void removeActivityTest() {
+        work.removeActivity(administration);
+        assertEquals(1, work.getActivities().size());
+        assertEquals(0, work.getActivities().indexOf(commute));
+    }
+
+    @Test
     void toStringTest() {
         work.setDescription("Munkahelyi tevékenységek");
         work.setNotes("Főállású munkahely");

@@ -20,6 +20,10 @@ public class Category {
         activities.add(activity);
     }
 
+    public void removeActivity(Activity activity) {
+        activities.remove(activity);
+    }
+
     @Override
     public String toString() {
         StringBuilder categoryString = new StringBuilder();
