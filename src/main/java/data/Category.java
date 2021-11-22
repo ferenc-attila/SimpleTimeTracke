@@ -23,7 +23,7 @@ public class Category {
     @Override
     public String toString() {
         StringBuilder categoryString = new StringBuilder();
-        categoryString.append("Id:");
+        categoryString.append("Id: ");
         categoryString.append(identifier);
         categoryString.append("\nKategória: ");
         categoryString.append(name);

@@ -23,24 +23,37 @@ class CategoryTest {
     void addActivityTest() {
         work.addActivity(administration);
         work.addActivity(commute);
-
         assertEquals(4, work.getActivities().size());
         assertEquals("administration", work.getActivities().get(2).getName());
     }
 
     @Test
     void toStringTest() {
+        work.setDescription("Munkahelyi tevékenységek");
+        work.setNotes("Főállású munkahely");
+        String workString = "Id: 1\n" +
+                "Kategória: Work\n" +
+                "Leírás: Munkahelyi tevékenységek\n" +
+                "Megjegyzés: Főállású munkahely\n" +
+                "Aktivitások: administration, Commute to work";
+        assertEquals(workString, work.toString());
     }
 
     @Test
     void setNameTest() {
+        work.setName("Full time work");
+        assertEquals("Full time work", work.getName());
     }
 
     @Test
     void setDescriptionTest() {
+        work.setDescription("Munkahelyi feladatok");
+        assertEquals("Munkahelyi feladatok", work.getDescription());
     }
 
     @Test
     void setNotesTest() {
+        work.setNotes("Jelenlegi főállás, valamint a két mellékállás");
+        assertEquals("Jelenlegi főállás, valamint a két mellékállás", work.getNotes());
     }
 }
