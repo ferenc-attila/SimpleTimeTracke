@@ -40,7 +40,9 @@ public class Activity {
     }
 
     public void setCategory(Category category) {
+        this.category.removeActivity(this);
         this.category = category;
+        category.addActivity(this);
     }
 
     public String getName() {
