@@ -6,15 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CategoryTest {
 
-    Category work = new Category(1, "Work");
+    Category work = new Category(1, "Munka");
     Activity administration = new Activity(1, work, "administration");
     Activity commute = new Activity(2, work, "Commute to work");
 
     @Test
     void createTest() {
-        Category family = new Category(2, "Family");
-        assertEquals(2, family.getIdentifier());
-        assertEquals("Family", family.getName());
+        Category family = new Category(0, "Család");
+        assertEquals(0, family.getIdentifier());
+        assertEquals("Család", family.getName());
     }
 
     @Test
@@ -38,7 +38,7 @@ class CategoryTest {
         work.setNotes("Főállású munkahely");
         String workString = """
                 Id: 1
-                Kategória: Work
+                Kategória: Munka
                 Leírás: Munkahelyi tevékenységek
                 Megjegyzés: Főállású munkahely
                 Aktivitások: administration, Commute to work""";
