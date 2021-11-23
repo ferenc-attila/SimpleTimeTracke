@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ActivityTest {
 
-    Category sport = new Category(1, "Sport");
-    Activity jogging = new Activity(15, sport, "Jogging");
+    Category selfTime = new Category(1, "Sport");
+    Activity jogging = new Activity(15, selfTime, "Jogging");
 
     @Test
     void createTest() {
@@ -15,7 +15,7 @@ class ActivityTest {
         assertEquals("Jogging", jogging.getName());
         assertEquals(1, jogging.getCategory().getIdentifier());
         assertEquals("Sport", jogging.getCategory().getName());
-        assertEquals(1, sport.getActivities().size());
+        assertEquals(1, selfTime.getActivities().size());
     }
 
     @Test
@@ -33,11 +33,11 @@ class ActivityTest {
 
     @Test
     void setCategory() {
-        Category healthCare = new Category(2, "Health Care");
-        jogging.setCategory(healthCare);
-        assertEquals(0, sport.getActivities().size());
-        assertEquals(1, healthCare.getActivities().size());
-        assertEquals("Health Care", jogging.getCategory().getName());
+        Category other = new Category(0, "Egyéb");
+        jogging.setCategory(other);
+        assertEquals(0, selfTime.getActivities().size());
+        assertEquals(1, other.getActivities().size());
+        assertEquals("Egyéb", jogging.getCategory().getName());
     }
 
     @Test
