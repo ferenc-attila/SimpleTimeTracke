@@ -16,7 +16,46 @@ public class Record {
         this.identifier = identifier;
         isActive = true;
         this.startTime = startTime;
+        this.activity = activity;
         activity.addRecord(this);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder recordString = new StringBuilder();
+        recordString.append("Id: ");
+        recordString.append(identifier);
+        recordString.append("\nKategória: ");
+        recordString.append(this.activity.getCategory().getName());
+        recordString.append("\nAktivitás: ");
+        recordString.append(this.activity.getName());
+        recordString.append("\nKezdés: ");
+        recordString.append(this.startTime.toString());
+        recordString.append("\nBefejezés: ");
+        recordString.append(createEndTimeString());
+        recordString.append("\nFolyamatban: ");
+        recordString.append(getActiveString());
+        recordString.append("\nLeírás: ");
+        recordString.append(description);
+        recordString.append("\nMegjegyzés: ");
+        recordString.append(notes);
+        return recordString.toString();
+    }
+
+    private String createEndTimeString() {
+        if (this.endTime == null) {
+            return "Folyamatban";
+        } else {
+            return this.endTime.toString();
+        }
+    }
+
+    private String getActiveString() {
+        if (isActive()) {
+            return "igen";
+        } else {
+            return "nem";
+        }
     }
 
     public int getIdentifier() {
