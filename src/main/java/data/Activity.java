@@ -1,5 +1,8 @@
 package data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Activity {
 
     private final int identifier;
@@ -7,12 +10,25 @@ public class Activity {
     private String name;
     private String description;
     private String notes;
+    private List<Record> records = new ArrayList<>();
 
     public Activity(int identifier, Category category, String name) {
         this.identifier = identifier;
         this.category = category;
-        category.addActivity(this);
         this.name = name;
+        category.addActivity(this);
+    }
+
+    public void addRecord(Record record) {
+        this.records.add(record);
+    }
+
+    public void removeRecord(Record record) {
+        records.remove(record);
+    }
+
+    public List<Record> getRecords() {
+        return records;
     }
 
     @Override

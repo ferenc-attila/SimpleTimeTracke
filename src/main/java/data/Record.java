@@ -16,7 +16,7 @@ public class Record {
         this.identifier = identifier;
         isActive = true;
         this.startTime = startTime;
-        this.activity = activity;
+        activity.addRecord(this);
     }
 
     public int getIdentifier() {
