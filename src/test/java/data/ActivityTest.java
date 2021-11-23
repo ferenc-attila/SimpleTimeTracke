@@ -2,12 +2,17 @@ package data;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ActivityTest {
 
     Category selfTime = new Category(1, "Sport");
     Activity jogging = new Activity(15, selfTime, "Jogging");
+    Record morningJogging = new Record(0, LocalDateTime.now(), jogging);
+    Record walking = new Record(1, LocalDateTime.now(), jogging);
 
     @Test
     void createTest() {
@@ -16,6 +21,22 @@ class ActivityTest {
         assertEquals(1, jogging.getCategory().getIdentifier());
         assertEquals("Sport", jogging.getCategory().getName());
         assertEquals(1, selfTime.getActivities().size());
+    }
+
+    @Test
+    void addRecordTest() {
+        jogging.addRecord(walking);
+        jogging.addRecord(morningJogging);
+        assertEquals(4, jogging.getRecords().size());
+        assertEquals(1, jogging.getRecords().get(2).getIdentifier());
+        assertTrue(jogging.getRecords().get(1).isActive());
+    }
+
+    @Test
+    void removeRecordTest() {
+        jogging.removeRecord(morningJogging);
+        assertEquals(1, jogging.getRecords().size());
+        assertEquals(1, jogging.getRecords().get(0).getIdentifier());
     }
 
     @Test
