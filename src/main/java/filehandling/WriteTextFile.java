@@ -11,7 +11,7 @@ public class WriteTextFile {
         try {
             Files.write(relativePath.resolve(filename), stringList);
         } catch (IOException ioe) {
-            throw new IllegalStateException("Unable to write file: " + relativePath.toString() + filename + ";", ioe);
+            throw new IllegalStateException("Unable to write file: " + relativePath + filename + ";", ioe);
         }
     }
 }
