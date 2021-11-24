@@ -18,24 +18,20 @@ public class Recording {
         this.startTime = startTime;
     }
 
-    public int getRecordLengthInMinutes() {
-        return 0;
-    }
-
     @Override
     public String toString() {
         StringBuilder recordString = new StringBuilder();
         recordString.append("Id: ");
         recordString.append(identifier);
-        recordString.append("\nKezdés: ");
+        recordString.append("\nStart time: ");
         recordString.append(this.startTime.toString());
-        recordString.append("\nBefejezés: ");
+        recordString.append("\nEnd time: ");
         recordString.append(createEndTimeString());
-        recordString.append("\nFolyamatban: ");
+        recordString.append("\nIn progress: ");
         recordString.append(getActiveString());
-        recordString.append("\nLeírás: ");
+        recordString.append("\nDescription: ");
         recordString.append(description);
-        recordString.append("\nMegjegyzés: ");
+        recordString.append("\nNotes: ");
         recordString.append(notes);
         return recordString.toString();
     }
