@@ -4,9 +4,9 @@ identifier;isActive;start time;end time;description;notes;activityID
 2;false;2021-08-12 07:10;2021-08-12 19:30;Northern Loon twitch;the bird was founded;2
 3;false;2021-04-15 16:30;2021-04-15 19:50;;;3
 4;false;2021-06-30 08:30;2021-06-30 10:10;project presentation;;5
-5;false;2021-12-24 15:00;2021-12-24 19:00; visiting parents;;3
+5;false;2021-12-24 15:00;2021-12-24 19:00;visiting parents;;3
 6;false;2021-12-24 19:00;2021-12-24 21:30;Christmas Eve at home;;7
-7;false;2021-01-02 15:10;;;;2
+7;false;2021-01-02 15:10;2021-01-02 15:40;;;2
 8;false;2021-06-10 07:45;2021-06-10 19:50;hiking in the local mountains;;1
 9;false;2021-05-15 08:10;2021-05-15 09:40;;kitchen cleaning;4
 10;false;2021-05-15 10:20;2021-05-15 11:50;cooking;;4

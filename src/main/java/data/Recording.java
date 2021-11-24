@@ -2,22 +2,20 @@ package data;
 
 import java.time.LocalDateTime;
 
-public class Record {
+public class Recording {
 
     private final int identifier;
+    private String description;
     private boolean isActive;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private Activity activity;
-    private String description;
     private String notes;
 
-    public Record(int identifier, LocalDateTime startTime, Activity activity) {
+    public Recording(int identifier, String description, LocalDateTime startTime) {
         this.identifier = identifier;
+        this.description = description;
         isActive = true;
         this.startTime = startTime;
-        this.activity = activity;
-        activity.addRecord(this);
     }
 
     public int getRecordLengthInMinutes() {
@@ -29,10 +27,6 @@ public class Record {
         StringBuilder recordString = new StringBuilder();
         recordString.append("Id: ");
         recordString.append(identifier);
-        recordString.append("\nKategória: ");
-        recordString.append(this.activity.getCategory().getName());
-        recordString.append("\nAktivitás: ");
-        recordString.append(this.activity.getName());
         recordString.append("\nKezdés: ");
         recordString.append(this.startTime.toString());
         recordString.append("\nBefejezés: ");
@@ -48,7 +42,7 @@ public class Record {
 
     private String createEndTimeString() {
         if (this.endTime == null) {
-            return "Folyamatban";
+            return "In progress";
         } else {
             return this.endTime.toString();
         }
@@ -56,9 +50,9 @@ public class Record {
 
     private String getActiveString() {
         if (isActive()) {
-            return "igen";
+            return "yes";
         } else {
-            return "nem";
+            return "no";
         }
     }
 
@@ -88,14 +82,6 @@ public class Record {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
-    }
-
-    public Activity getActivity() {
-        return activity;
-    }
-
-    public void setActivity(Activity activity) {
-        this.activity = activity;
     }
 
     public String getDescription() {
