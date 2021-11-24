@@ -1,4 +1,4 @@
-package validations;
+package datahandling.validations;
 
 public class RecordingsTableValidation {
 }

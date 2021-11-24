@@ -1,6 +1,6 @@
-package recording;
+package service.recording;
 
-import data.Recording;
+import datahandling.data.Recording;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package recording;
+package service.recording;
 
 public class StopRecording {
 }

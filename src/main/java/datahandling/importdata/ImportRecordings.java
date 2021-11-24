@@ -1,4 +1,4 @@
-package importdata;
+package datahandling.importdata;
 
 public class ImportRecordings {
 }

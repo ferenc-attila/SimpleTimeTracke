@@ -1,4 +1,4 @@
-package maintenance;
+package service.maintenance;
 
 public class RecordingMaintenance {
 }
