@@ -5,17 +5,16 @@ import java.util.Scanner;
 public class MainMenu {
 
     private final String[] mainMenu = {"\n*** Simple Time Tracker ***\n",
-            "Háttéradatok karbantartása",
-            "Aktivitás indítása/leállítása",
-            "Adatok exportálása/importálása",
-            "Kilépés"};
+            "Start recording",
+            "Stop recording",
+            "Exit"};
 
     Scanner scanner = new Scanner(System.in);
 
     public void runMainMenu() {
         printMenu();
 
-        System.out.println("Válassz egyet a fenti lehetőségek közül, és add meg a sorszámát:");
+        System.out.println("Select one function above and enter its number:");
         String selectedMenuItem = scanner.nextLine();
 
         switch (selectedMenuItem) {
