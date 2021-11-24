@@ -20,6 +20,10 @@ public class Record {
         activity.addRecord(this);
     }
 
+    public int getRecordLengthInMinutes() {
+        return 0;
+    }
+
     @Override
     public String toString() {
         StringBuilder recordString = new StringBuilder();
