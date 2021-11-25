@@ -24,7 +24,7 @@ public class StartRecording {
     private int createIdentifier(RecordingList recordingList) {
         int maxIdentifier = 0;
         if (!recordingList.getRecordings().isEmpty()) {
-            for (int i = 0; i < recordingList.getRecordings().size(); i++) {
+            for (int i = 0; i < recordingList.getRecordings().size() - 1; i++) {
                 maxIdentifier = recordingList.getRecordings().get(i).getIdentifier();
                 if (maxIdentifier < recordingList.getRecordings().get(i + 1).getIdentifier()) {
                     maxIdentifier = recordingList.getRecordings().get(i + 1).getIdentifier();
