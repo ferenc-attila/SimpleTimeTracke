@@ -28,4 +28,32 @@ class StartRecordingTest {
         assertNull(commute.getNotes());
         assertNull(commute.getEndTime());
     }
+
+    @Test
+    void printStartMessageTest() {
+        start.startRecording("morning commute", recordingList);
+        String minuteNow = getMinuteNow();
+        String testStartTime = LocalDateTime.now().getYear() + "-" +
+                LocalDateTime.now().getMonthValue() + "-" +
+                LocalDateTime.now().getDayOfMonth() + " " +
+                LocalDateTime.now().getHour() + ":" +
+                minuteNow;
+        String expectedString = "Recording started with parameters below:" +
+                "\nId.: 0" +
+                "\nDescription: morning commute" +
+                "\nStart time: " +
+                testStartTime +
+                "\nEnd time: null" +
+                "\nIn progress: yes" +
+                "\nNotes: null";
+        assertEquals(expectedString, start.printStartMessage(recordingList.getRecordings().get(0)).toString());
+    }
+
+    private String getMinuteNow() {
+        if (LocalDateTime.now().getMinute() < 10) {
+            return "0" + LocalDateTime.now().getMinute();
+        } else {
+            return ((Integer) (LocalDateTime.now().getMinute())).toString();
+        }
+    }
 }

@@ -8,6 +8,12 @@ public class StopRecording {
 
     public void stopRecording(Recording recording) {
         recording.setEndTime(LocalDateTime.now());
-        recording.setActive(false);
+    }
+
+    public StringBuilder printStopMessage(Recording recording) {
+        StringBuilder message = new StringBuilder();
+        message.append("Recording ended with parameters below:\n");
+        message.append(recording.toString());
+        return message;
     }
 }

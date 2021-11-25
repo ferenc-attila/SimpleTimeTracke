@@ -21,26 +21,52 @@ public class Recording {
     @Override
     public String toString() {
         StringBuilder recordString = new StringBuilder();
-        recordString.append("Id: ");
+        recordString.append("Id.: ");
         recordString.append(identifier);
+        recordString.append("\nDescription: ");
+        recordString.append(description);
         recordString.append("\nStart time: ");
-        recordString.append(this.startTime.toString());
+        recordString.append(timeValueToString(this.startTime));
         recordString.append("\nEnd time: ");
         recordString.append(createEndTimeString());
         recordString.append("\nIn progress: ");
         recordString.append(getActiveString());
-        recordString.append("\nDescription: ");
-        recordString.append(description);
         recordString.append("\nNotes: ");
         recordString.append(notes);
         return recordString.toString();
     }
 
+    private String timeValueToString(LocalDateTime dateTime) {
+        return dateTime.toString().replace('T', ' ').substring(0, 16);
+    }
+
+    public StringBuilder toCsvRow() {
+        StringBuilder csvRow = new StringBuilder();
+        String separator = ";";
+        csvRow.append(identifier);
+        addSeparator(csvRow, separator);
+        csvRow.append(description);
+        addSeparator(csvRow, separator);
+        csvRow.append(timeValueToString(this.startTime));
+        addSeparator(csvRow, separator);
+        csvRow.append(createEndTimeString());
+        addSeparator(csvRow, separator);
+        csvRow.append(getActiveString());
+        addSeparator(csvRow, separator);
+        csvRow.append(notes);
+
+        return csvRow;
+    }
+
+    private void addSeparator(StringBuilder stringBuilder, String separator) {
+        stringBuilder.append(separator);
+    }
+
     private String createEndTimeString() {
         if (this.endTime == null) {
-            return "In progress";
+            return "null";
         } else {
-            return this.endTime.toString();
+            return timeValueToString(this.endTime);
         }
     }
 
@@ -78,6 +104,7 @@ public class Recording {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
+        this.isActive = false;
     }
 
     public String getDescription() {
