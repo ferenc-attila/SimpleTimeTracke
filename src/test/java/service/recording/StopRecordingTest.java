@@ -20,7 +20,7 @@ class StopRecordingTest {
     void stopRecordingTest() {
         recordingList.getRecordings().add(new Recording(0, "morning commute", LocalDateTime.parse("2021-06-12T06:15")));
         Recording commute = list.get(0);
-        stop.stopRecording(list.get(0));
+        stop.stopRecording(commute);
         assertFalse(commute.isActive());
         assertEquals(LocalDateTime.now().getMinute(), commute.getEndTime().getMinute());
     }
@@ -28,8 +28,7 @@ class StopRecordingTest {
     @Test
     void printStopMessageTest() {
         recordingList.getRecordings().add(new Recording(0, "morning commute", LocalDateTime.parse("2021-06-12T06:15")));
-        Recording commute = list.get(0);
-        stop.stopRecording(commute);
+        stop.stopRecording(recordingList.getRecordings().get(0));
         String minuteNow = getMinuteNow();
         String testTimeNow = LocalDateTime.now().getYear() + "-" +
                 LocalDateTime.now().getMonthValue() + "-" +

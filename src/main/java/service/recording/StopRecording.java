@@ -1,10 +1,14 @@
 package service.recording;
 
 import datahandling.data.Recording;
+import datahandling.data.RecordingList;
+import datahandling.queries.FindRecordings;
 
 import java.time.LocalDateTime;
 
 public class StopRecording {
+
+    FindRecordings find = new FindRecordings();
 
     public void stopRecording(Recording recording) {
         recording.setEndTime(LocalDateTime.now());

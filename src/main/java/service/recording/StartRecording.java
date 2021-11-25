@@ -2,13 +2,19 @@ package service.recording;
 
 import datahandling.data.Recording;
 import datahandling.data.RecordingList;
+import datahandling.queries.FindRecordings;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class StartRecording {
 
+    FindRecordings find = new FindRecordings();
+
     public void startRecording(String description, RecordingList recordingList) {
+        if (find.numberOfActiveRecording(recordingList.getRecordings()) > 0) {
+            throw new IllegalStateException("Active recording running! Try to stop it before start another!");
+        }
         int identifier = createIdentifier(recordingList);
         Recording recording = new Recording(identifier, description, LocalDateTime.now());
         recordingList.addRecording(recording);
