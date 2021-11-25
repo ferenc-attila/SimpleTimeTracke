@@ -40,7 +40,7 @@ public class Recording {
         return dateTime.toString().replace('T', ' ').substring(0, 16);
     }
 
-    public StringBuilder toCsvRow() {
+    public String toCsvRow() {
         StringBuilder csvRow = new StringBuilder();
         String separator = ";";
         csvRow.append(identifier);
@@ -55,7 +55,11 @@ public class Recording {
         addSeparator(csvRow, separator);
         csvRow.append(notes);
 
-        return csvRow;
+        return csvRow.toString();
+    }
+
+    public String printRecordingToMenu() {
+        return identifier + ": " + description + ", In progress: " + getActiveString();
     }
 
     private void addSeparator(StringBuilder stringBuilder, String separator) {

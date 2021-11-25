@@ -43,6 +43,12 @@ class RecordingTest {
     }
 
     @Test
+    void printRecordingToMenu() {
+        String expectedString = "0: jogging, In progress: yes";
+        assertEquals(expectedString, recording.printRecordingToMenu());
+    }
+
+    @Test
     void getIdentifierTest() {
         assertEquals(0, recording.getIdentifier());
     }
