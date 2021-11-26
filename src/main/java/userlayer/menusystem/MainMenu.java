@@ -3,7 +3,9 @@ package userlayer.menusystem;
 import datahandling.data.Recording;
 import datahandling.data.RecordingList;
 import datahandling.queries.FindRecordings;
+import datahandling.readdata.ReadCsvData;
 import datahandling.writedata.CreateCsvData;
+import filehandling.ReadTextFile;
 import filehandling.WriteTextFile;
 import service.recording.StartRecording;
 import service.recording.StopRecording;
@@ -15,21 +17,24 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-    private final List<String> mainMenuItems = Arrays.asList("\n*** Simple Time Tracker ***\n",
+    private final List<String> mainMenuItems = Arrays.asList("\n*** Simple Time Tracker ***\n\n",
             "Start recording",
             "Stop recording",
-            "Exit");
+            "Exit\n");
 
     Scanner scanner = new Scanner(System.in);
     RecordingList recordingList = new RecordingList();
     StartRecording start = new StartRecording();
     StopRecording stop = new StopRecording();
-    WriteTextFile write = new WriteTextFile();
+    ReadTextFile readFile = new ReadTextFile();
+    WriteTextFile writeFile = new WriteTextFile();
+    ReadCsvData createData = new ReadCsvData();
     CreateCsvData createDataStrings = new CreateCsvData();
     FindRecordings find = new FindRecordings();
     List<Recording> listOfRecords = recordingList.getRecordings();
 
     public void runMainMenu() {
+        initialization();
         printMenu();
 
         System.out.println("Select one function above and enter its number:");
@@ -52,11 +57,24 @@ public class MainMenu {
         }
     }
 
+    private void initialization() {
+        System.out.println("Initialization ...");
+        try {
+            List<String> fileContent = readFile.readTextFile(Path.of("src/main/resources/recordings.csv"));
+            System.out.println("Scanning database ...");
+            createData.readData(fileContent, recordingList);
+            System.out.println("Database scanned successfully.");
+        } catch (IllegalStateException ise) {
+            System.out.println("Unable to read database file! Starting with empty database.");
+        }
+    }
+
     private void runExit() {
+        System.out.println("\n** Exit **");
         List<String> dataForSave = createDataStrings.writeCsvData(recordingList);
         try {
             System.out.println("Saving data ...");
-            write.writeTextFile(Path.of("src/main/resources"), "recordings.csv", dataForSave);
+            writeFile.writeTextFile(Path.of("src/main/resources"), "recordings.csv", dataForSave);
             System.out.println("Data saved successfully.");
         } catch (IllegalStateException ise) {
             System.out.println(ise.getMessage());
@@ -67,6 +85,7 @@ public class MainMenu {
     }
 
     private void runStartRecording() {
+        System.out.println("\n** Start recording **\n");
         System.out.println("Enter the name of the new recording!");
         String description = scanner.nextLine();
         try {
@@ -80,6 +99,7 @@ public class MainMenu {
     }
 
     private void runStopRecording() {
+        System.out.println("\n** Stop recording **\n");
         try {
             Recording finishedRecord = find.findActiveRecording(listOfRecords);
             stop.stopRecording(finishedRecord);
