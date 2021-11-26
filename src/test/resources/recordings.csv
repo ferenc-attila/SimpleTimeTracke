@@ -1,12 +1,12 @@
-identifier;isActive;start time;end time;description;notes;activityID
-0;false;2021-06-04 17:45;2021-06-04 18:25;evening jogging;;0
-1;true;2021-11-25 06:10;;morning commute;by bus;5
-2;false;2021-08-12 07:10;2021-08-12 19:30;Northern Loon twitch;the bird was founded;2
-3;false;2021-04-15 16:30;2021-04-15 19:50;;;3
-4;false;2021-06-30 08:30;2021-06-30 10:10;project presentation;;5
-5;false;2021-12-24 15:00;2021-12-24 19:00;visiting parents;;3
-6;false;2021-12-24 19:00;2021-12-24 21:30;Christmas Eve at home;;7
-7;false;2021-01-02 15:10;2021-01-02 15:40;;;2
-8;false;2021-06-10 07:45;2021-06-10 19:50;hiking in the local mountains;;1
-9;false;2021-05-15 08:10;2021-05-15 09:40;;kitchen cleaning;4
-10;false;2021-05-15 10:20;2021-05-15 11:50;cooking;;4
+identifier;description;isActive;start time;end time;notes;activityId
+0;evening jogging;false;2021-06-04 18:25;2021-06-04 17:45;;0
+1;morning commute;true;;2021-11-25 06:10;by bus;5
+2;Northern Loon twitch;false;2021-08-12 19:30;2021-08-12 07:10;the bird was founded;2
+3;;false;2021-04-15 19:50;2021-04-15 16:30;;3
+4;project presentation;false;2021-06-30 10:10;2021-06-30 08:30;;5
+5;visiting parents;false;2021-12-24 19:00;2021-12-24 15:00;;3
+6;Christmas Eve at home;false;2021-12-24 21:30;2021-12-24 19:00;;7
+7;;false;2021-01-02 15:40;2021-01-02 15:10;;2
+8;hiking in the local mountains;false;2021-06-10 19:50;2021-06-10 07:45;;1
+9;;false;2021-05-15 09:40;2021-05-15 08:10;kitchen cleaning;4
+10;cooking;false;2021-05-15 11:50;2021-05-15 10:20;;4
