@@ -47,11 +47,11 @@ public class Recording {
         addSeparator(csvRow, separator);
         csvRow.append(description);
         addSeparator(csvRow, separator);
+        csvRow.append(getActiveString());
+        addSeparator(csvRow, separator);
         csvRow.append(timeValueToString(this.startTime));
         addSeparator(csvRow, separator);
         csvRow.append(createEndTimeString());
-        addSeparator(csvRow, separator);
-        csvRow.append(getActiveString());
         addSeparator(csvRow, separator);
         csvRow.append(notes);
 

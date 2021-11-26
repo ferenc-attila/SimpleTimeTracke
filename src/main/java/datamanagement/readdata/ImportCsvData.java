@@ -10,7 +10,7 @@ public class ImportCsvData {
 
     public void readData(List<String> fileContent, RecordingList recordingList) {
         for (int i = 1; i < fileContent.size(); i++) {
-            String[] cells = fileContent.get(i).split(";",6);
+            String[] cells = fileContent.get(i).split(";", 6);
             Recording recording = parseRecording(cells);
             recordingList.getRecordings().add(recording);
         }
@@ -19,7 +19,7 @@ public class ImportCsvData {
     private Recording parseRecording(String[] cells) {
         int identifier = Integer.parseInt(cells[0]);
         String description = cells[1];
-        LocalDateTime startTime = parseTime(cells,3);
+        LocalDateTime startTime = parseTime(cells, 3);
         LocalDateTime endTime = createEndTimeValue(cells);
         String notes = cells[5];
         return createRecording(identifier, description, startTime, endTime, notes);
