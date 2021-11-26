@@ -2,25 +2,24 @@ package datamanagement.queries;
 
 import datamanagement.data.Recording;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FindRecordings {
 
     public Recording findActiveRecording(List<Recording> list) {
-        List<Recording> activeRecordings = new ArrayList<>();
-        for (Recording recording : list) {
-            if (recording.isActive()) {
-                activeRecordings.add(recording);
+        Recording activeRecording = null;
+        if (numberOfActiveRecording(list) == 0) {
+            throw new IllegalArgumentException("No active recording in the list!");
+        } else if (numberOfActiveRecording(list) > 1) {
+            throw new IllegalArgumentException(("Invalid list, " + numberOfActiveRecording(list) + " active records in the list!"));
+        } else {
+            for (Recording recording : list) {
+                if (recording.isActive()) {
+                    activeRecording = recording;
+                }
             }
         }
-        if (activeRecordings.isEmpty()) {
-            throw new IllegalArgumentException("No active recording in the list!");
-        } else if (activeRecordings.size() > 1) {
-            throw new IllegalArgumentException(("Invalid list, " + activeRecordings.size() + " active records in the list!"));
-        } else {
-            return activeRecordings.get(0);
-        }
+        return activeRecording;
     }
 
     public int numberOfActiveRecording(List<Recording> list) {
