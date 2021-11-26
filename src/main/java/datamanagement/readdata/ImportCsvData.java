@@ -1,12 +1,12 @@
-package datahandling.readdata;
+package datamanagement.readdata;
 
-import datahandling.data.Recording;
-import datahandling.data.RecordingList;
+import datamanagement.data.Recording;
+import datamanagement.data.RecordingList;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class ReadCsvData {
+public class ImportCsvData {
 
     public void readData(List<String> fileContent, RecordingList recordingList) {
         for (String row : fileContent) {

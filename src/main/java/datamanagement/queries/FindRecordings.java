@@ -1,6 +1,6 @@
-package datahandling.queries;
+package datamanagement.queries;
 
-import datahandling.data.Recording;
+import datamanagement.data.Recording;
 
 import java.util.ArrayList;
 import java.util.List;

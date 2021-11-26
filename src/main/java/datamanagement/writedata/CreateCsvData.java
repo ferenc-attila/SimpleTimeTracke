@@ -1,7 +1,7 @@
-package datahandling.writedata;
+package datamanagement.writedata;
 
-import datahandling.data.Recording;
-import datahandling.data.RecordingList;
+import datamanagement.data.Recording;
+import datamanagement.data.RecordingList;
 
 import java.util.ArrayList;
 import java.util.List;

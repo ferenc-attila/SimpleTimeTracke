@@ -1,4 +1,4 @@
-package datahandling.data;
+package datamanagement.data;
 
 import org.junit.jupiter.api.Test;
 

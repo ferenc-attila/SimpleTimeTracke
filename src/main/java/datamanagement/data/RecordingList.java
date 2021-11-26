@@ -1,4 +1,4 @@
-package datahandling.data;
+package datamanagement.data;
 
 import java.util.ArrayList;
 import java.util.List;

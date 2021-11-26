@@ -1,12 +1,12 @@
 package userlayer.menusystem;
 
-import datahandling.data.Recording;
-import datahandling.data.RecordingList;
-import datahandling.queries.FindRecordings;
-import datahandling.readdata.ReadCsvData;
-import datahandling.writedata.CreateCsvData;
-import filehandling.ReadTextFile;
-import filehandling.WriteTextFile;
+import datamanagement.data.Recording;
+import datamanagement.data.RecordingList;
+import datamanagement.queries.FindRecordings;
+import datamanagement.readdata.ImportCsvData;
+import datamanagement.writedata.CreateCsvData;
+import filemanagement.ReadTextFile;
+import filemanagement.WriteTextFile;
 import service.recording.StartRecording;
 import service.recording.StopRecording;
 
@@ -27,7 +27,7 @@ public class MainMenu {
     StopRecording stop = new StopRecording();
     ReadTextFile readFile = new ReadTextFile();
     WriteTextFile writeFile = new WriteTextFile();
-    ReadCsvData createData = new ReadCsvData();
+    ImportCsvData createData = new ImportCsvData();
     CreateCsvData createDataStrings = new CreateCsvData();
     FindRecordings find = new FindRecordings();
     List<Recording> listOfRecords = recordingList.getRecordings();
