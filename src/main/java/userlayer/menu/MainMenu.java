@@ -1,4 +1,4 @@
-package userlayer.menusystem;
+package userlayer.menu;
 
 import datamanagement.data.Recording;
 import datamanagement.data.RecordingList;
