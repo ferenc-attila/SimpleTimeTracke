@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-    private final List<String> mainMenuItems = Arrays.asList("\n*** Simple Time Tracker ***\n\n",
+    private final List<String> mainMenuItems = Arrays.asList("\n*** Simple Time Tracker ***\n",
             "Start recording",
             "Stop recording",
             "Exit\n");
@@ -71,16 +71,21 @@ public class MainMenu {
 
     private void runExit() {
         System.out.println("\n** Exit **");
-        List<String> dataForSave = createDataStrings.writeCsvData(recordingList);
-        try {
-            System.out.println("Saving data ...");
-            writeFile.writeTextFile(Path.of("src/main/resources"), "recordings.csv", dataForSave);
-            System.out.println("Data saved successfully.");
-        } catch (IllegalStateException ise) {
-            System.out.println(ise.getMessage());
-            ise.getCause().printStackTrace();
-        } finally {
-            System.out.println("Exiting");
+        if (listOfRecords.isEmpty()) {
+            System.out.println("Nothing to save!");
+            System.out.println("Thanks for using the application!");
+        } else {
+            List<String> dataForSave = createDataStrings.writeCsvData(recordingList);
+            try {
+                System.out.println("Saving data ...");
+                writeFile.writeTextFile(Path.of("src/main/resources"), "recordings.csv", dataForSave);
+                System.out.println("Data saved successfully.");
+            } catch (IllegalStateException ise) {
+                System.out.println(ise.getMessage());
+                ise.getCause().printStackTrace();
+            } finally {
+                System.out.println("Thanks for using the application!");
+            }
         }
     }
 
@@ -112,6 +117,17 @@ public class MainMenu {
     }
 
     private void printMenu() {
-        System.out.println(mainMenuItems);
+        for (int i = 0; i < mainMenuItems.size(); i++) {
+            if (i == 0) {
+                System.out.println(mainMenuItems.get(i));
+            } else {
+                System.out.println(i + ".: " + mainMenuItems.get(i));
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.runMainMenu();
     }
 }
