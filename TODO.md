@@ -1,6 +1,6 @@
 # ToDo List
 
-Write missing unit tests.  
+Write missing unit tests (for file management, menu classes).  
 Exception handling.
 
 Validations:
