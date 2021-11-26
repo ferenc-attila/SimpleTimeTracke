@@ -1,8 +1,7 @@
 # ToDo List
 
 Write missing unit tests.  
-Exception handling.  
-Solve CSV header read/write problems.
+Exception handling.
 
 Validations:
  - Verify that the IDs are unique.

@@ -9,8 +9,8 @@ import java.util.List;
 public class ImportCsvData {
 
     public void readData(List<String> fileContent, RecordingList recordingList) {
-        for (String row : fileContent) {
-            String[] cells = row.split(";",6);
+        for (int i = 1; i < fileContent.size(); i++) {
+            String[] cells = fileContent.get(i).split(";",6);
             Recording recording = parseRecording(cells);
             recordingList.getRecordings().add(recording);
         }

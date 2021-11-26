@@ -14,7 +14,8 @@ class ImportCsvDataTest {
 
     ImportCsvData readData = new ImportCsvData();
     RecordingList recordingList = new RecordingList();
-    List<String> fileContent = Arrays.asList("0;evening jogging;false;2021-06-04 18:25;;",
+    List<String> fileContent = Arrays.asList("identifier;description;isActive;start time;end time;notes",
+            "0;evening jogging;false;2021-06-04 18:25;;",
             "1;morning commute;true;2021-11-25 05:40;2021-11-25 06:10;by bus",
             "4;Northern Loon twitch;false;2021-08-12 19:30;2021-08-12 07:10;the bird was founded");
     List<Recording> list = recordingList.getRecordings();
