@@ -39,7 +39,7 @@ class RecordingTest {
     void toCsvRowTest() {
         recording.setEndTime(LocalDateTime.parse("2021-05-14T18:21"));
         String expected = "0;jogging;2021-05-14 17:17;2021-05-14 18:21;no;my best time";
-        assertEquals(expected, recording.toCsvRow().toString());
+        assertEquals(expected, recording.toCsvRow());
     }
 
     @Test
