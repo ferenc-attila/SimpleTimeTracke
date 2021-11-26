@@ -17,8 +17,7 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-    private final List<String> mainMenuItems = Arrays.asList("\n*** Simple Time Tracker ***\n",
-            "Start recording",
+    private final List<String> mainMenuItems = Arrays.asList("Start recording",
             "Stop recording",
             "Exit\n");
 
@@ -33,7 +32,12 @@ public class MainMenu {
     FindRecordings find = new FindRecordings();
     List<Recording> listOfRecords = recordingList.getRecordings();
 
-    public void runMainMenu() {
+    public static void main(String[] args) {
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.runMainMenu();
+    }
+
+    private void runMainMenu() {
         initialization();
         printMenu();
 
@@ -58,6 +62,7 @@ public class MainMenu {
     }
 
     private void initialization() {
+        System.out.println("\n*** Simple Time Tracker ***\n");
         System.out.println("Initialization ...");
         try {
             List<String> fileContent = readFile.readTextFile(Path.of("src/main/resources/recordings.csv"));
@@ -117,17 +122,9 @@ public class MainMenu {
     }
 
     private void printMenu() {
+        System.out.println();
         for (int i = 0; i < mainMenuItems.size(); i++) {
-            if (i == 0) {
-                System.out.println(mainMenuItems.get(i));
-            } else {
-                System.out.println(i + ".: " + mainMenuItems.get(i));
-            }
+            System.out.println((i + 1) + ".: " + mainMenuItems.get(i));
         }
-    }
-
-    public static void main(String[] args) {
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.runMainMenu();
     }
 }
