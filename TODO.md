@@ -1,8 +1,12 @@
 # ToDo List
 
-Verify that the IDs and names are unique in the activities and categories.
-Check that the recorded activities do not overlap in time.
-Check the correct relationship between isActive and endTime values.
+Write missing unit tests.  
+Exception handling.
+
+Validations:
+ - Verify that the IDs are unique.
+ - Check that the recorded activities do not overlap in time.
+ - Check the correct relationship between isActive and endTime values.
 
 Read isActive from csv file:
 
