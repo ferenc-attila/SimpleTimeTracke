@@ -3,7 +3,7 @@ package userlayer.menu;
 import datamanagement.data.Recording;
 import datamanagement.data.RecordingList;
 import datamanagement.queries.FindRecordings;
-import datamanagement.readdata.ImportCsvData;
+import datamanagement.readdata.ReadCsvData;
 import datamanagement.writedata.CreateCsvData;
 import filemanagement.ReadTextFile;
 import filemanagement.WriteTextFile;
@@ -27,7 +27,7 @@ public class MainMenu {
     StopRecording stop = new StopRecording();
     ReadTextFile readFile = new ReadTextFile();
     WriteTextFile writeFile = new WriteTextFile();
-    ImportCsvData createData = new ImportCsvData();
+    ReadCsvData createData = new ReadCsvData();
     CreateCsvData createDataStrings = new CreateCsvData();
     FindRecordings find = new FindRecordings();
     List<Recording> listOfRecords = recordingList.getRecordings();

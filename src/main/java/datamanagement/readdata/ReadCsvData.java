@@ -6,7 +6,7 @@ import datamanagement.data.RecordingList;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class ImportCsvData {
+public class ReadCsvData {
 
     public void readData(List<String> fileContent, RecordingList recordingList) {
         for (int i = 1; i < fileContent.size(); i++) {

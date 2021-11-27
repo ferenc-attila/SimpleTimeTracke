@@ -10,9 +10,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ImportCsvDataTest {
+class ReadCsvDataTest {
 
-    ImportCsvData readData = new ImportCsvData();
+    ReadCsvData readData = new ReadCsvData();
     RecordingList recordingList = new RecordingList();
     List<String> fileContent = Arrays.asList("identifier;description;isActive;start time;end time;notes",
             "0;evening jogging;false;2021-06-04 18:25;;",
