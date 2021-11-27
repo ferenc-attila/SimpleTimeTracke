@@ -73,7 +73,7 @@ class RecordingTest {
     }
 
     @Test
-    void setEndTimeTest() {
+    void finishRecordingTest() {
         recording.finishRecording(LocalDateTime.parse("2021-05-14T17:18"));
         assertEquals(LocalDateTime.of(2021, 5, 14, 17, 18), recording.getEndTime());
         assertFalse(recording.isActive());
