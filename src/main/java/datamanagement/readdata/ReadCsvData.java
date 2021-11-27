@@ -28,7 +28,7 @@ public class ReadCsvData {
     private Recording createRecording(int identifier, String description, LocalDateTime startTime, LocalDateTime endTime, String notes) {
         Recording recording = new Recording(identifier, description, startTime);
         if (endTime != null) {
-            recording.setEndTime(endTime);
+            recording.finishRecording(endTime);
         }
         recording.setNotes(notes);
         return recording;

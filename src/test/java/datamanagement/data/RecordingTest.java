@@ -23,7 +23,7 @@ class RecordingTest {
         assertEquals(1, anotherRecording.getIdentifier());
         assertEquals("cooking", anotherRecording.getDescription());
         assertTrue(anotherRecording.isActive());
-        anotherRecording.setEndTime(LocalDateTime.parse("2021-05-15T21:40"));
+        anotherRecording.finishRecording(LocalDateTime.parse("2021-05-15T21:40"));
         assertFalse(anotherRecording.isActive());
         assertEquals("2021-05-15T21:40", anotherRecording.getEndTime().toString());
         assertEquals("garden party", anotherRecording.getNotes());
@@ -37,7 +37,7 @@ class RecordingTest {
 
     @Test
     void toCsvRowTest() {
-        recording.setEndTime(LocalDateTime.parse("2021-05-14T18:21"));
+        recording.finishRecording(LocalDateTime.parse("2021-05-14T18:21"));
         String expected = "0;jogging;2021-05-14 17:17;2021-05-14 18:21;no;my best time";
         assertEquals(expected, recording.toCsvRow());
     }
@@ -56,7 +56,7 @@ class RecordingTest {
     @Test
     void isActiveTest() {
         assertTrue(recording.isActive());
-        recording.setEndTime(LocalDateTime.parse("2021-05-14T18:21"));
+        recording.finishRecording(LocalDateTime.parse("2021-05-14T18:21"));
         assertFalse(recording.isActive());
     }
 
@@ -74,7 +74,7 @@ class RecordingTest {
 
     @Test
     void setEndTimeTest() {
-        recording.setEndTime(LocalDateTime.parse("2021-05-14T17:18"));
+        recording.finishRecording(LocalDateTime.parse("2021-05-14T17:18"));
         assertEquals(LocalDateTime.of(2021, 5, 14, 17, 18), recording.getEndTime());
         assertFalse(recording.isActive());
     }

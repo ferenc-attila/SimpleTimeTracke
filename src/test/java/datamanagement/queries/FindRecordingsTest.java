@@ -21,9 +21,9 @@ class FindRecordingsTest {
         recordingList.addRecording(new Recording(1, "running", LocalDateTime.now()));
         recordingList.addRecording(new Recording(2, "running", LocalDateTime.now()));
         recordingList.addRecording(new Recording(3, "running", LocalDateTime.now()));
-        list.get(0).setEndTime(LocalDateTime.now());
-        list.get(1).setEndTime(LocalDateTime.now());
-        list.get(2).setEndTime(LocalDateTime.now());
+        list.get(0).finishRecording(LocalDateTime.now());
+        list.get(1).finishRecording(LocalDateTime.now());
+        list.get(2).finishRecording(LocalDateTime.now());
         assertEquals(3, find.findActiveRecording(list).getIdentifier());
         assertTrue(find.findActiveRecording(list).isActive());
     }
@@ -34,10 +34,10 @@ class FindRecordingsTest {
         recordingList.addRecording(new Recording(1, "running", LocalDateTime.now()));
         recordingList.addRecording(new Recording(2, "running", LocalDateTime.now()));
         recordingList.addRecording(new Recording(3, "running", LocalDateTime.now()));
-        list.get(0).setEndTime(LocalDateTime.now());
-        list.get(1).setEndTime(LocalDateTime.now());
-        list.get(2).setEndTime(LocalDateTime.now());
-        list.get(3).setEndTime(LocalDateTime.now());
+        list.get(0).finishRecording(LocalDateTime.now());
+        list.get(1).finishRecording(LocalDateTime.now());
+        list.get(2).finishRecording(LocalDateTime.now());
+        list.get(3).finishRecording(LocalDateTime.now());
         IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> find.findActiveRecording(list));
         assertEquals("No active recording in the list!", iae.getMessage());
     }
@@ -59,12 +59,12 @@ class FindRecordingsTest {
         recordingList.addRecording(new Recording(3, "running", LocalDateTime.now()));
         recordingList.addRecording(new Recording(4, "running", LocalDateTime.now()));
         assertEquals(4, find.numberOfActiveRecording(list));
-        list.get(0).setEndTime(LocalDateTime.now());
+        list.get(0).finishRecording(LocalDateTime.now());
         assertEquals(3, find.numberOfActiveRecording(list));
-        list.get(1).setEndTime(LocalDateTime.now());
-        list.get(2).setEndTime(LocalDateTime.now());
+        list.get(1).finishRecording(LocalDateTime.now());
+        list.get(2).finishRecording(LocalDateTime.now());
         assertEquals(1, find.numberOfActiveRecording(list));
-        list.get(3).setEndTime(LocalDateTime.now());
+        list.get(3).finishRecording(LocalDateTime.now());
         assertEquals(0, find.numberOfActiveRecording(list));
     }
 }

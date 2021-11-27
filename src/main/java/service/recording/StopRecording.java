@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class StopRecording {
 
     public void stopRecording(Recording recording) {
-        recording.setEndTime(LocalDateTime.now());
+        recording.finishRecording(LocalDateTime.now());
     }
 
     public StringBuilder printStopMessage(Recording recording) {

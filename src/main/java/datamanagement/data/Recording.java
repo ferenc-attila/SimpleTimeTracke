@@ -14,7 +14,7 @@ public class Recording {
     public Recording(int identifier, String description, LocalDateTime startTime) {
         this.identifier = identifier;
         this.description = description;
-        isActive = true;
+        this.isActive = true;
         this.startTime = startTime;
     }
 
@@ -34,10 +34,6 @@ public class Recording {
         recordString.append("\nNotes: ");
         recordString.append(notes);
         return recordString.toString();
-    }
-
-    private String timeValueToString(LocalDateTime dateTime) {
-        return dateTime.toString().replace('T', ' ').substring(0, 16);
     }
 
     public String toCsvRow() {
@@ -60,6 +56,15 @@ public class Recording {
 
     public String printRecordingToMenu() {
         return identifier + ": " + description + ", In progress: " + getActiveString();
+    }
+
+    public void finishRecording(LocalDateTime endTime) {
+        this.endTime = endTime;
+        this.isActive = false;
+    }
+
+    private String timeValueToString(LocalDateTime dateTime) {
+        return dateTime.toString().replace('T', ' ').substring(0, 16);
     }
 
     private void addSeparator(StringBuilder stringBuilder, String separator) {
@@ -108,7 +113,6 @@ public class Recording {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
-        this.isActive = false;
     }
 
     public String getDescription() {
