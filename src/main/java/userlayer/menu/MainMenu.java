@@ -11,6 +11,7 @@ import service.recording.StartRecording;
 import service.recording.StopRecording;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -65,7 +66,7 @@ public class MainMenu {
         System.out.println("\n*** Simple Time Tracker ***\n");
         System.out.println("Initialization ...");
         try {
-            List<String> fileContent = readFile.readTextFile(Path.of("src/main/resources/recordings.csv"));
+            List<String> fileContent = readFile.readTextFile(Paths.get("src", "main", "resources", "recordings.csv"));
             System.out.println("Scanning database ...");
             createData.readData(fileContent, recordingList);
             System.out.println("Database scanned successfully.");
@@ -83,7 +84,7 @@ public class MainMenu {
             List<String> dataForSave = createDataStrings.writeCsvData(recordingList);
             try {
                 System.out.println("Saving data ...");
-                writeFile.writeTextFile(Path.of("src/main/resources"), "recordings.csv", dataForSave);
+                writeFile.writeTextFile(Paths.get("src", "main", "resources"), "recordings.csv", dataForSave);
                 System.out.println("Data saved successfully.");
             } catch (IllegalStateException ise) {
                 System.out.println(ise.getMessage());
