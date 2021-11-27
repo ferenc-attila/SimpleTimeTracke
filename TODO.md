@@ -19,3 +19,5 @@ Read isActive from csv file:
             throw new IllegalArgumentException("Invalid data in csv!");
         }
     }
+
+Export file outside app folder or into user defined path.
