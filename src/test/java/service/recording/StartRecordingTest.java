@@ -5,6 +5,7 @@ import datamanagement.data.RecordingList;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,21 +13,29 @@ class StartRecordingTest {
 
     RecordingList recordingList = new RecordingList();
     StartRecording start = new StartRecording();
+    List<Recording> list = recordingList.getRecordings();
 
     @Test
     void startRecordingTest() {
         start.startRecording("morning commute", recordingList);
+        Recording commute = list.get(0);
+        commute.setEndTime(LocalDateTime.now());
         start.startRecording("jogging", recordingList);
-        Recording commute = recordingList.getRecordings().get(0);
-        Recording jogging = recordingList.getRecordings().get(1);
-        assertEquals(2, recordingList.getRecordings().size());
-        assertTrue(commute.isActive());
-        assertEquals(0, commute.getIdentifier());
+        Recording jogging = list.get(1);
+        assertEquals(2, list.size());
+        assertTrue(jogging.isActive());
         assertEquals(1, jogging.getIdentifier());
-        assertEquals("morning commute", commute.getDescription());
-        assertEquals(LocalDateTime.now().getMinute(), commute.getStartTime().getMinute());
-        assertNull(commute.getNotes());
-        assertNull(commute.getEndTime());
+        assertEquals("jogging", jogging.getDescription());
+        assertEquals(LocalDateTime.now().getMinute(), jogging.getStartTime().getMinute());
+        assertNull(jogging.getNotes());
+        assertNull(jogging.getEndTime());
+    }
+
+    @Test
+    void startRecordingInProgressTest() {
+        start.startRecording("morning commute", recordingList);
+        IllegalStateException ise = assertThrows(IllegalStateException.class, () -> start.startRecording("jogging", recordingList));
+        assertEquals("Active recording running! Try to stop it before start another!", ise.getMessage());
     }
 
     @Test
@@ -34,13 +43,18 @@ class StartRecordingTest {
         recordingList.addRecording(new Recording(3, "housework", LocalDateTime.now()));
         recordingList.addRecording(new Recording(4, "project planning", LocalDateTime.now().minusDays(5)));
         recordingList.addRecording(new Recording(2, "meeting", LocalDateTime.now().minusMonths(2)));
+        list.get(0).setEndTime(LocalDateTime.now());
+        list.get(1).setEndTime(LocalDateTime.now().minusDays(5));
+        list.get(2).setEndTime(LocalDateTime.now().minusMonths(2));
         start.startRecording("hiking", recordingList);
-        assertEquals("hiking", recordingList.getRecordings().get(3).getDescription());
-        assertEquals(5, recordingList.getRecordings().get(3).getIdentifier());
+        assertEquals("hiking", list.get(3).getDescription());
+        assertEquals(5, list.get(3).getIdentifier());
+        list.get(3).setEndTime(LocalDateTime.now());
         recordingList.addRecording(new Recording(0, "go out with the dog", LocalDateTime.now().minusWeeks(2)));
+        list.get(4).setEndTime(LocalDateTime.now().minusWeeks(2));
         start.startRecording("travel to Grandparents", recordingList);
-        assertEquals("travel to Grandparents", recordingList.getRecordings().get(5).getDescription());
-        assertEquals(6, recordingList.getRecordings().get(5).getIdentifier());
+        assertEquals("travel to Grandparents", list.get(5).getDescription());
+        assertEquals(6, list.get(5).getIdentifier());
     }
 
     @Test
@@ -60,7 +74,7 @@ class StartRecordingTest {
                 "\nEnd time: null" +
                 "\nIn progress: yes" +
                 "\nNotes: null";
-        assertEquals(expectedString, start.printStartMessage(recordingList.getRecordings().get(0)).toString());
+        assertEquals(expectedString, start.printStartMessage(list.get(0)).toString());
     }
 
     private String getMinuteNow() {
