@@ -11,7 +11,7 @@ public class ReadTextFile {
         try {
             return Files.readAllLines(path);
         } catch (IOException ioe) {
-            throw new IllegalStateException("Unable to read file: " + path + ";", ioe);
+            throw new IllegalStateException("Unable to read file: " + path + "!", ioe);
         }
     }
 }
