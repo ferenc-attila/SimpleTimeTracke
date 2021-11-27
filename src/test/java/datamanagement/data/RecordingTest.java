@@ -31,15 +31,17 @@ class RecordingTest {
 
     @Test
     void ToStringTest() {
-        String expected = "Id.: 0\nDescription: jogging\nStart time: 2021-05-14 17:17\nEnd time: null\nIn progress: yes\nNotes: my best time";
+        String expected = "Id.: 0\nDescription: jogging\nStart time: 2021-05-14 17:17\nEnd time: \nIn progress: yes\nNotes: my best time";
         assertEquals(expected, recording.toString());
     }
 
     @Test
     void toCsvRowTest() {
-        recording.finishRecording(LocalDateTime.parse("2021-05-14T18:21"));
-        String expected = "0;jogging;no;2021-05-14 17:17;2021-05-14 18:21;my best time";
+        String expected = "0;jogging;yes;2021-05-14 17:17;;my best time";
         assertEquals(expected, recording.toCsvRow());
+        recording.finishRecording(LocalDateTime.parse("2021-05-14T18:21"));
+        String expectedFinishedRecording = "0;jogging;no;2021-05-14 17:17;2021-05-14 18:21;my best time";
+        assertEquals(expectedFinishedRecording, recording.toCsvRow());
     }
 
     @Test

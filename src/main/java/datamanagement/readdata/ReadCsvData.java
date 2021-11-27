@@ -35,10 +35,10 @@ public class ReadCsvData {
     }
 
     private LocalDateTime createEndTimeValue(String[] cells) {
-        if (!cells[4].isEmpty()) {
-            return parseTime(cells, 4);
-        } else {
+        if ((cells[4] == null) || (cells[4].isEmpty())) {
             return null;
+        } else {
+            return parseTime(cells, 4);
         }
     }
 

@@ -28,7 +28,7 @@ class ReadTextFileTest {
     void readTextInvalidFileTest() {
         Path invalidPath = Paths.get("src/test/recordings_.txt");
         IllegalStateException ise = assertThrows(IllegalStateException.class, () -> read.readTextFile(invalidPath));
-        assertEquals("Unable to read file: src/test/recordings_.txt!", ise.getMessage());
+        assertEquals("Unable to read file: src\\test\\recordings_.txt!", ise.getMessage());
         assertEquals(NoSuchFileException.class, ise.getCause().getClass());
     }
 }

@@ -24,12 +24,12 @@ class CreateCsvDataTest {
         List<String> csvData = write.writeCsvData(recordingList);
         assertEquals(3, csvData.size());
         assertEquals("identifier;description;in_progress;start_time;end_time;notes", csvData.get(0));
-        assertEquals("0;hiking in the mountains;yes;2021-06-12 15:22;null;null", csvData.get(1));
-        assertEquals("1;Cooking;yes;2021-05-10 10:11;null;null", csvData.get(2));
+        assertEquals("0;hiking in the mountains;yes;2021-06-12 15:22;;null", csvData.get(1));
+        assertEquals("1;Cooking;yes;2021-05-10 10:11;;null", csvData.get(2));
         list.get(1).finishRecording(LocalDateTime.parse("2021-05-10T12:38"));
         list.get(0).setNotes("It is fun!");
         csvData = write.writeCsvData(recordingList);
         assertEquals("1;Cooking;no;2021-05-10 10:11;2021-05-10 12:38;null", csvData.get(2));
-        assertEquals("0;hiking in the mountains;yes;2021-06-12 15:22;null;It is fun!", csvData.get(1));
+        assertEquals("0;hiking in the mountains;yes;2021-06-12 15:22;;It is fun!", csvData.get(1));
     }
 }

@@ -73,7 +73,7 @@ public class Recording {
 
     private String createEndTimeString() {
         if (this.endTime == null) {
-            return "null";
+            return "";
         } else {
             return timeValueToString(this.endTime);
         }
@@ -109,10 +109,6 @@ public class Recording {
 
     public LocalDateTime getEndTime() {
         return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
     }
 
     public String getDescription() {

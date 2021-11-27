@@ -10,7 +10,6 @@ import filemanagement.WriteTextFile;
 import service.recording.StartRecording;
 import service.recording.StopRecording;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +19,7 @@ public class MainMenu {
 
     private final List<String> mainMenuItems = Arrays.asList("Start recording",
             "Stop recording",
-            "Exit\n");
+            "Exit");
 
     Scanner scanner = new Scanner(System.in);
     RecordingList recordingList = new RecordingList();
@@ -35,43 +34,56 @@ public class MainMenu {
 
     public static void main(String[] args) {
         MainMenu mainMenu = new MainMenu();
+        mainMenu.initialization();
         mainMenu.runMainMenu();
     }
 
-    private void runMainMenu() {
-        initialization();
+    public void runMainMenu() {
+        printDatabaseDetails();
         printMenu();
 
         System.out.println("Select one function above and enter its number:");
         String selectedMenuItem = scanner.nextLine();
 
         switch (selectedMenuItem) {
-            case "1" -> {
+            case "1":
                 runStartRecording();
-                runMainMenu();
-            }
-            case "2" -> {
+                break;
+            case "2":
                 runStopRecording();
-                runMainMenu();
-            }
-            case "3" -> runExit();
-            default -> {
+                break;
+            case "3":
+                runExit();
+                break;
+            default:
                 System.out.println("You entered an invalid value! Try again!");
                 runMainMenu();
             }
         }
-    }
 
     private void initialization() {
         System.out.println("\n*** Simple Time Tracker ***\n");
         System.out.println("Initialization ...");
         try {
-            List<String> fileContent = readFile.readTextFile(Paths.get("src", "main", "resources", "recordings.csv"));
+            List<String> fileContent = readFile.readTextFile(Paths.get("recordings.csv"));
             System.out.println("Scanning database ...");
             createData.readData(fileContent, recordingList);
             System.out.println("Database scanned successfully.");
+            int numberOfRecordings = recordingList.getRecordings().size();
+            System.out.println("There are " + numberOfRecordings + " recordings in the database.");
         } catch (IllegalStateException ise) {
             System.out.println("Unable to read database file! Starting with empty database.");
+        }
+    }
+
+    private void printDatabaseDetails() {
+        if (find.numberOfActiveRecording(listOfRecords) == 0) {
+            System.out.println("\nNo recording in progress.");
+        } else if (find.numberOfActiveRecording(listOfRecords) > 1) {
+            System.out.println("Warning! Invalid data in the database! There are more than one recordings in progress!");
+        } else {
+        Recording activeRecording = find.findActiveRecording(listOfRecords);
+        System.out.println("\nThe details of the active recording are:\n\n" + activeRecording.toString());
         }
     }
 
@@ -84,7 +96,7 @@ public class MainMenu {
             List<String> dataForSave = createDataStrings.writeCsvData(recordingList);
             try {
                 System.out.println("Saving data ...");
-                writeFile.writeTextFile(Paths.get("src", "main", "resources"), "recordings.csv", dataForSave);
+                writeFile.writeTextFile(Paths.get(""), "recordings.csv", dataForSave);
                 System.out.println("Data saved successfully.");
             } catch (IllegalStateException ise) {
                 System.out.println(ise.getMessage());
@@ -101,7 +113,6 @@ public class MainMenu {
         String description = scanner.nextLine();
         try {
             start.startRecording(description, recordingList);
-            System.out.println(start.printStartMessage(listOfRecords.get(listOfRecords.size() - 1)));
         } catch (IllegalStateException ise) {
             System.out.println(ise.getMessage());
         } finally {

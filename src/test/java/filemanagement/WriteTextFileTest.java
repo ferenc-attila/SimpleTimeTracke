@@ -44,6 +44,6 @@ class WriteTextFileTest {
         Path invalidPath = Paths.get("M:");
         IllegalStateException ise = assertThrows(IllegalStateException.class, () -> write.writeTextFile(invalidPath, "recordings_.txt", fileContentToWrite));
         assertEquals("Unable to write file: M:recordings_.txt!", ise.getMessage());
-        assertEquals(NoSuchFileException.class, ise.getCause().getClass());
+        assertEquals(IOException.class, ise.getCause().getClass());
     }
 }
