@@ -60,12 +60,11 @@ class StartRecordingTest {
     @Test
     void printStartMessageTest() {
         start.startRecording("morning commute", recordingList);
-        String minuteNow = getMinuteNow();
         String testStartTime = LocalDateTime.now().getYear() + "-" +
                 LocalDateTime.now().getMonthValue() + "-" +
                 LocalDateTime.now().getDayOfMonth() + " " +
-                LocalDateTime.now().getHour() + ":" +
-                minuteNow;
+                getTwoDigitTimeValue(LocalDateTime.now().getHour()) + ":" +
+                getTwoDigitTimeValue(LocalDateTime.now().getMinute());
         String expectedString = "Recording started with parameters below:" +
                 "\nId.: 0" +
                 "\nDescription: morning commute" +
@@ -77,11 +76,11 @@ class StartRecordingTest {
         assertEquals(expectedString, start.printStartMessage(list.get(0)).toString());
     }
 
-    private String getMinuteNow() {
-        if (LocalDateTime.now().getMinute() < 10) {
-            return "0" + LocalDateTime.now().getMinute();
+    private String getTwoDigitTimeValue(int timeValue) {
+        if ( timeValue< 10) {
+            return "0" + timeValue;
         } else {
-            return ((Integer) (LocalDateTime.now().getMinute())).toString();
+            return String.valueOf(timeValue);
         }
     }
 }
