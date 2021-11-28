@@ -1,9 +1,10 @@
 # ToDo List
 
-Write missing unit tests (for file management, menu classes).  
+Write missing unit tests (for menu classes).  
 Exception handling.
+Update and delete data.
 
-Validations:
+Fata validations:
  - Verify that the IDs are unique.
  - Check that the recorded activities do not overlap in time.
  - Check the correct relationship between isActive and endTime values.
@@ -20,4 +21,4 @@ Read isActive from csv file:
         }
     }
 
-Export file outside app folder or into user defined path.
+Export/import to /from user defined folder.
