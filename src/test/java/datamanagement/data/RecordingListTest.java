@@ -1,5 +1,7 @@
 package datamanagement.data;
 
+import datamanagement.data.recording.Recording;
+import datamanagement.data.recording.RecordingList;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package datamanagement.queries;
 
-import datamanagement.data.Recording;
+import datamanagement.data.recording.Recording;
 
 import java.util.List;
 

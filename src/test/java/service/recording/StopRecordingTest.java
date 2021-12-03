@@ -1,7 +1,7 @@
 package service.recording;
 
-import datamanagement.data.Recording;
-import datamanagement.data.RecordingList;
+import datamanagement.data.recording.Recording;
+import datamanagement.data.recording.RecordingList;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -30,8 +30,8 @@ class StopRecordingTest {
         recordingList.getRecordings().add(new Recording(0, "morning commute", LocalDateTime.parse("2021-06-12T06:15")));
         stop.stopRecording(recordingList.getRecordings().get(0));
         String testTimeNow = LocalDateTime.now().getYear() + "-" +
-                LocalDateTime.now().getMonthValue() + "-" +
-                LocalDateTime.now().getDayOfMonth() + " " +
+                getTwoDigitTimeValue(LocalDateTime.now().getMonthValue()) + "-" +
+                getTwoDigitTimeValue(LocalDateTime.now().getDayOfMonth()) + " " +
                 getTwoDigitTimeValue(LocalDateTime.now().getHour()) + ":" +
                 getTwoDigitTimeValue(LocalDateTime.now().getMinute());
         String expectedString = "Recording ended with parameters below:" +
@@ -42,6 +42,7 @@ class StopRecordingTest {
                 testTimeNow +
                 "\nIn progress: no" +
                 "\nNotes: null";
+
         assertEquals(expectedString, stop.printStopMessage(recordingList.getRecordings().get(0)).toString());
     }
 

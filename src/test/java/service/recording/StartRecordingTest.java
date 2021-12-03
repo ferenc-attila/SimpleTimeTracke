@@ -1,7 +1,7 @@
 package service.recording;
 
-import datamanagement.data.Recording;
-import datamanagement.data.RecordingList;
+import datamanagement.data.recording.Recording;
+import datamanagement.data.recording.RecordingList;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -47,12 +47,15 @@ class StartRecordingTest {
         list.get(1).finishRecording(LocalDateTime.now().minusDays(5));
         list.get(2).finishRecording(LocalDateTime.now().minusMonths(2));
         start.startRecording("hiking", recordingList);
+
         assertEquals("hiking", list.get(3).getDescription());
         assertEquals(5, list.get(3).getIdentifier());
+
         list.get(3).finishRecording(LocalDateTime.now());
         recordingList.addRecording(new Recording(0, "go out with the dog", LocalDateTime.now().minusWeeks(2)));
         list.get(4).finishRecording(LocalDateTime.now().minusWeeks(2));
         start.startRecording("travel to Grandparents", recordingList);
+
         assertEquals("travel to Grandparents", list.get(5).getDescription());
         assertEquals(6, list.get(5).getIdentifier());
     }
@@ -61,8 +64,8 @@ class StartRecordingTest {
     void printStartMessageTest() {
         start.startRecording("morning commute", recordingList);
         String testStartTime = LocalDateTime.now().getYear() + "-" +
-                LocalDateTime.now().getMonthValue() + "-" +
-                LocalDateTime.now().getDayOfMonth() + " " +
+                getTwoDigitTimeValue(LocalDateTime.now().getMonthValue()) + "-" +
+                getTwoDigitTimeValue(LocalDateTime.now().getDayOfMonth()) + " " +
                 getTwoDigitTimeValue(LocalDateTime.now().getHour()) + ":" +
                 getTwoDigitTimeValue(LocalDateTime.now().getMinute());
         String expectedString = "Recording started with parameters below:" +
@@ -73,11 +76,12 @@ class StartRecordingTest {
                 "\nEnd time: " +
                 "\nIn progress: yes" +
                 "\nNotes: null";
+
         assertEquals(expectedString, start.printStartMessage(list.get(0)).toString());
     }
 
     private String getTwoDigitTimeValue(int timeValue) {
-        if ( timeValue< 10) {
+        if (timeValue < 10) {
             return "0" + timeValue;
         } else {
             return String.valueOf(timeValue);

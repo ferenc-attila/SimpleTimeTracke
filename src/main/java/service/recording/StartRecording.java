@@ -1,7 +1,7 @@
 package service.recording;
 
-import datamanagement.data.Recording;
-import datamanagement.data.RecordingList;
+import datamanagement.data.recording.Recording;
+import datamanagement.data.recording.RecordingList;
 import datamanagement.queries.FindRecordings;
 
 import java.time.LocalDateTime;

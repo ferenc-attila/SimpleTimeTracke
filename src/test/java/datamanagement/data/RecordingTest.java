@@ -1,5 +1,6 @@
 package datamanagement.data;
 
+import datamanagement.data.recording.Recording;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

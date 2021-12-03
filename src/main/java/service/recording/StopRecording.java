@@ -1,6 +1,6 @@
 package service.recording;
 
-import datamanagement.data.Recording;
+import datamanagement.data.recording.Recording;
 
 import java.time.LocalDateTime;
 

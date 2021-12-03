@@ -1,7 +1,7 @@
 package datamanagement.queries;
 
-import datamanagement.data.Recording;
-import datamanagement.data.RecordingList;
+import datamanagement.data.recording.Recording;
+import datamanagement.data.recording.RecordingList;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

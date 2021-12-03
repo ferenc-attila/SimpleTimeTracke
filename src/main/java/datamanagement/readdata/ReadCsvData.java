@@ -1,7 +1,7 @@
 package datamanagement.readdata;
 
-import datamanagement.data.Recording;
-import datamanagement.data.RecordingList;
+import datamanagement.data.recording.Recording;
+import datamanagement.data.recording.RecordingList;
 
 import java.time.LocalDateTime;
 import java.util.List;

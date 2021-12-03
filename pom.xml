@@ -22,7 +22,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>userlayer.menu.MainMenu</mainClass>
+                            <mainClass>main.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

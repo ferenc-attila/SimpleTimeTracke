@@ -1,7 +1,7 @@
 package userlayer.menu;
 
-import datamanagement.data.Recording;
-import datamanagement.data.RecordingList;
+import datamanagement.data.recording.Recording;
+import datamanagement.data.recording.RecordingList;
 import datamanagement.queries.FindRecordings;
 import datamanagement.readdata.ReadCsvData;
 import datamanagement.writedata.CreateCsvData;
@@ -32,12 +32,6 @@ public class MainMenu {
     FindRecordings find = new FindRecordings();
     List<Recording> listOfRecords = recordingList.getRecordings();
 
-    public static void main(String[] args) {
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.initialization();
-        mainMenu.runMainMenu();
-    }
-
     public void runMainMenu() {
         printDatabaseDetails();
         printMenu();
@@ -58,10 +52,10 @@ public class MainMenu {
             default:
                 System.out.println("You entered an invalid value! Try again!");
                 runMainMenu();
-            }
         }
+    }
 
-    private void initialization() {
+    public void initialization() {
         System.out.println("\n*** Simple Time Tracker ***\n");
         System.out.println("Initialization ...");
         try {
@@ -82,8 +76,8 @@ public class MainMenu {
         } else if (find.numberOfActiveRecording(listOfRecords) > 1) {
             System.out.println("Warning! Invalid data in the database! There are more than one recordings in progress!");
         } else {
-        Recording activeRecording = find.findActiveRecording(listOfRecords);
-        System.out.println("\nThe details of the active recording are:\n\n" + activeRecording.toString());
+            Recording activeRecording = find.findActiveRecording(listOfRecords);
+            System.out.println("\nThe details of the active recording are:\n\n" + activeRecording.toString());
         }
     }
 

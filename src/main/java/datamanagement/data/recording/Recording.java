@@ -1,4 +1,4 @@
-package datamanagement.data;
+package datamanagement.data.recording;
 
 import java.time.LocalDateTime;
 
