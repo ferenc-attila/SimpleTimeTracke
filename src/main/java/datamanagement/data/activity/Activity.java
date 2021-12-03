@@ -32,4 +32,8 @@ public class Activity {
     public String getNotes() {
         return notes;
     }
+
+    public List<Recording> getRecordings() {
+        return recordings;
+    }
 }
