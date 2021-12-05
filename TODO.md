@@ -1,12 +1,13 @@
 # ToDo List
 
 Write missing unit tests (for menu classes).  
+Refactoring  
 Exception handling.  
 Update and delete data.  
-Constructor overloading in data classes.  
-Introduce Activity and Categories classes.  
+Constructor overloading in data classes (solved partially).  
+Introduce Activity and Categories classes (activity introduced).  
 Data validations:
- - Verify that the IDs are unique.
+ - Verify that the IDs are unique (solved).
  - Check that the recorded activities do not overlap in time.
  - Check the correct relationship between isActive and endTime values.
 

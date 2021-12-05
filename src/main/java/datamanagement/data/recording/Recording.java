@@ -1,19 +1,23 @@
 package datamanagement.data.recording;
 
+import datamanagement.data.activity.Activity;
+
 import java.time.LocalDateTime;
 
 public class Recording {
 
     private final int identifier;
     private String description;
+    private Activity activity;
     private boolean isActive;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String notes;
 
-    public Recording(int identifier, String description, LocalDateTime startTime) {
+    public Recording(int identifier, String description, Activity activity, LocalDateTime startTime) {
         this.identifier = identifier;
         this.description = description;
+        this.activity = activity;
         this.isActive = true;
         this.startTime = startTime;
     }
@@ -25,6 +29,8 @@ public class Recording {
         recordString.append(identifier);
         recordString.append("\nDescription: ");
         recordString.append(description);
+        recordString.append("\nActivity: ");
+        recordString.append(activity.getName());
         recordString.append("\nStart time: ");
         recordString.append(timeValueToString(this.startTime));
         recordString.append("\nEnd time: ");
@@ -43,19 +49,21 @@ public class Recording {
         addSeparator(csvRow, separator);
         csvRow.append(description);
         addSeparator(csvRow, separator);
+        csvRow.append(activity.getName());
+        addSeparator(csvRow, separator);
         csvRow.append(getActiveString());
         addSeparator(csvRow, separator);
         csvRow.append(timeValueToString(this.startTime));
         addSeparator(csvRow, separator);
         csvRow.append(createEndTimeString());
         addSeparator(csvRow, separator);
-        csvRow.append(notes);
+        csvRow.append(createBlankStringIfNull(notes));
 
         return csvRow.toString();
     }
 
     public String printRecordingToMenu() {
-        return identifier + ": " + description + ", In progress: " + getActiveString();
+        return identifier + ": " + description + ", Activity: " + activity.getName() + ", In progress: " + getActiveString();
     }
 
     public void finishRecording(LocalDateTime endTime) {
@@ -87,6 +95,14 @@ public class Recording {
         }
     }
 
+    private String createBlankStringIfNull(String string) {
+        if (string == null) {
+            return "";
+        } else {
+            return string;
+        }
+    }
+
     public int getIdentifier() {
         return identifier;
     }
@@ -97,6 +113,10 @@ public class Recording {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public Activity getActivity() {
+        return activity;
     }
 
     public LocalDateTime getStartTime() {

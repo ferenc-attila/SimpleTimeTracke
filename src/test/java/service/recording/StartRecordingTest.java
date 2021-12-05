@@ -1,28 +1,36 @@
 package service.recording;
 
+import datamanagement.data.activity.Activity;
+import datamanagement.data.activity.ActivityList;
 import datamanagement.data.recording.Recording;
-import datamanagement.data.recording.RecordingList;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class StartRecordingTest {
 
-    RecordingList recordingList = new RecordingList();
+    ActivityList activityList = new ActivityList();
     StartRecording start = new StartRecording();
-    List<Recording> list = recordingList.getRecordings();
+
+    @BeforeEach
+    void init() {
+        activityList.getActivities().add(new Activity(0, "Work", "", ""));
+        activityList.getActivities().add(new Activity(1, "Sport", "", ""));
+        activityList.getActivities().add(new Activity(2, "Family", "", ""));
+        activityList.getActivities().add(new Activity(3, "Housekeeping", "", ""));
+    }
 
     @Test
     void startRecordingTest() {
-        start.startRecording("morning commute", recordingList);
-        Recording commute = list.get(0);
+        start.startRecording("morning commute", activityList, activityList.findActivity("Work"));
+        Recording commute = activityList.getActivities().get(0).getRecordings().get(0);
         commute.finishRecording(LocalDateTime.now());
-        start.startRecording("jogging", recordingList);
-        Recording jogging = list.get(1);
-        assertEquals(2, list.size());
+        start.startRecording("jogging", activityList, activityList.findActivity(1));
+        Recording jogging = activityList.getActivities().get(1).getRecordings().get(0);
+        assertEquals(1, activityList.getActivities().get(0).getRecordings().size());
         assertTrue(jogging.isActive());
         assertEquals(1, jogging.getIdentifier());
         assertEquals("jogging", jogging.getDescription());
@@ -33,36 +41,36 @@ class StartRecordingTest {
 
     @Test
     void startRecordingInProgressTest() {
-        start.startRecording("morning commute", recordingList);
-        IllegalStateException ise = assertThrows(IllegalStateException.class, () -> start.startRecording("jogging", recordingList));
+        start.startRecording("morning commute", activityList, activityList.findActivity("Work"));
+        IllegalStateException ise = assertThrows(IllegalStateException.class, () -> start.startRecording("jogging", activityList, activityList.findActivity("Sport")));
         assertEquals("Active recording running! Try to stop it before start another!", ise.getMessage());
     }
 
     @Test
     void createIdentifierMaxIdNotInTheEndOfListTest() {
-        recordingList.addRecording(new Recording(3, "housework", LocalDateTime.now()));
-        recordingList.addRecording(new Recording(4, "project planning", LocalDateTime.now().minusDays(5)));
-        recordingList.addRecording(new Recording(2, "meeting", LocalDateTime.now().minusMonths(2)));
-        list.get(0).finishRecording(LocalDateTime.now());
-        list.get(1).finishRecording(LocalDateTime.now().minusDays(5));
-        list.get(2).finishRecording(LocalDateTime.now().minusMonths(2));
-        start.startRecording("hiking", recordingList);
+        activityList.getActivities().get(0).addRecording(new Recording(3, "evening commute", activityList.getActivities().get(3), LocalDateTime.now()));
+        activityList.getActivities().get(0).addRecording(new Recording(4, "project planning", activityList.getActivities().get(0), LocalDateTime.now().minusDays(5)));
+        activityList.getActivities().get(0).addRecording(new Recording(2, "meeting", activityList.getActivities().get(0), LocalDateTime.now().minusMonths(2)));
+        activityList.getActivities().get(0).getRecordings().get(0).finishRecording(LocalDateTime.now());
+        activityList.getActivities().get(0).getRecordings().get(1).finishRecording(LocalDateTime.now().minusDays(5));
+        activityList.getActivities().get(0).getRecordings().get(2).finishRecording(LocalDateTime.now().minusMonths(2));
+        start.startRecording("morning commute", activityList, activityList.findActivity("Work"));
 
-        assertEquals("hiking", list.get(3).getDescription());
-        assertEquals(5, list.get(3).getIdentifier());
+        assertEquals("project planning", activityList.getActivities().get(0).getRecordings().get(1).getDescription());
+        assertEquals(5, activityList.getActivities().get(0).getRecordings().get(3).getIdentifier());
 
-        list.get(3).finishRecording(LocalDateTime.now());
-        recordingList.addRecording(new Recording(0, "go out with the dog", LocalDateTime.now().minusWeeks(2)));
-        list.get(4).finishRecording(LocalDateTime.now().minusWeeks(2));
-        start.startRecording("travel to Grandparents", recordingList);
+        activityList.getActivities().get(0).getRecordings().get(3).finishRecording(LocalDateTime.now());
+        activityList.getActivities().get(0).addRecording(new Recording(0, "project closing event", activityList.findActivity("Work"), LocalDateTime.now().minusWeeks(2)));
+        activityList.getActivities().get(0).getRecordings().get(4).finishRecording(LocalDateTime.now().minusWeeks(2));
+        start.startRecording("travel to conference", activityList, activityList.findActivity("Work"));
 
-        assertEquals("travel to Grandparents", list.get(5).getDescription());
-        assertEquals(6, list.get(5).getIdentifier());
+        assertEquals("travel to conference", activityList.getActivities().get(0).getRecordings().get(5).getDescription());
+        assertEquals(6, activityList.getActivities().get(0).getRecordings().get(5).getIdentifier());
     }
 
     @Test
     void printStartMessageTest() {
-        start.startRecording("morning commute", recordingList);
+        start.startRecording("morning commute", activityList, activityList.getActivities().get(0));
         String testStartTime = LocalDateTime.now().getYear() + "-" +
                 getTwoDigitTimeValue(LocalDateTime.now().getMonthValue()) + "-" +
                 getTwoDigitTimeValue(LocalDateTime.now().getDayOfMonth()) + " " +
@@ -71,13 +79,14 @@ class StartRecordingTest {
         String expectedString = "Recording started with parameters below:" +
                 "\nId.: 0" +
                 "\nDescription: morning commute" +
+                "\nActivity: Work" +
                 "\nStart time: " +
                 testStartTime +
                 "\nEnd time: " +
                 "\nIn progress: yes" +
                 "\nNotes: null";
 
-        assertEquals(expectedString, start.printStartMessage(list.get(0)).toString());
+        assertEquals(expectedString, start.printStartMessage(activityList.getActivities().get(0).getRecordings().get(0)).toString());
     }
 
     private String getTwoDigitTimeValue(int timeValue) {

@@ -1,5 +1,6 @@
-package datamanagement.data;
+package datamanagement.data.recording;
 
+import datamanagement.data.activity.Activity;
 import datamanagement.data.recording.Recording;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RecordingTest {
 
-    Recording recording = new Recording(0, "jogging", LocalDateTime.parse("2021-05-14T17:17"));
+    Activity sport = new Activity(0, "Sport", "daily workout", "");
+    Recording recording = new Recording(0, "jogging", sport, LocalDateTime.parse("2021-05-14T17:17"));
 
     @BeforeEach
     void init() {
@@ -19,7 +21,8 @@ class RecordingTest {
 
     @Test
     void createTest() {
-        Recording anotherRecording = new Recording(1, "cooking", LocalDateTime.parse("2021-05-15T18:10"));
+        Activity houseWork = new Activity(1,"Housework", "", "");
+        Recording anotherRecording = new Recording(1, "cooking", houseWork, LocalDateTime.parse("2021-05-15T18:10"));
         anotherRecording.setNotes("garden party");
         assertEquals(1, anotherRecording.getIdentifier());
         assertEquals("cooking", anotherRecording.getDescription());
@@ -32,22 +35,22 @@ class RecordingTest {
 
     @Test
     void ToStringTest() {
-        String expected = "Id.: 0\nDescription: jogging\nStart time: 2021-05-14 17:17\nEnd time: \nIn progress: yes\nNotes: my best time";
+        String expected = "Id.: 0\nDescription: jogging\nActivity: Sport\nStart time: 2021-05-14 17:17\nEnd time: \nIn progress: yes\nNotes: my best time";
         assertEquals(expected, recording.toString());
     }
 
     @Test
     void toCsvRowTest() {
-        String expected = "0;jogging;yes;2021-05-14 17:17;;my best time";
+        String expected = "0;jogging;Sport;yes;2021-05-14 17:17;;my best time";
         assertEquals(expected, recording.toCsvRow());
         recording.finishRecording(LocalDateTime.parse("2021-05-14T18:21"));
-        String expectedFinishedRecording = "0;jogging;no;2021-05-14 17:17;2021-05-14 18:21;my best time";
+        String expectedFinishedRecording = "0;jogging;Sport;no;2021-05-14 17:17;2021-05-14 18:21;my best time";
         assertEquals(expectedFinishedRecording, recording.toCsvRow());
     }
 
     @Test
     void printRecordingToMenu() {
-        String expectedString = "0: jogging, In progress: yes";
+        String expectedString = "0: jogging, Activity: Sport, In progress: yes";
         assertEquals(expectedString, recording.printRecordingToMenu());
     }
 
