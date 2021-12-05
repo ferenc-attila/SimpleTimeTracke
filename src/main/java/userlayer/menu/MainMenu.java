@@ -3,7 +3,6 @@ package userlayer.menu;
 import datamanagement.data.activity.Activity;
 import datamanagement.data.activity.ActivityList;
 import datamanagement.data.recording.Recording;
-import datamanagement.queries.FindRecordings;
 import datamanagement.readdata.ReadActivityCsv;
 import datamanagement.readdata.ReadRecordingCsv;
 import datamanagement.writedata.CreateActivityCsvData;
@@ -34,7 +33,6 @@ public class MainMenu {
     private ReadRecordingCsv createRecordingData = new ReadRecordingCsv();
     private CreateRecordingCsvData createRecordingCsvData = new CreateRecordingCsvData();
     private CreateActivityCsvData createActivityCsvData = new CreateActivityCsvData();
-    private FindRecordings find = new FindRecordings();
     private List<Activity> listOfActivities = activityList.getActivities();
 
     public void runMainMenu() {
@@ -126,13 +124,13 @@ public class MainMenu {
     }
 
     private void printActiveRecording() {
-        int numberOfActiveRecords = find.numberOfActiveRecording(activityList);
+        int numberOfActiveRecords = activityList.numberOfActiveRecording();
         if (numberOfActiveRecords == 0) {
             System.out.println("\nNo recording in progress.");
         } else if (numberOfActiveRecords > 1) {
             System.out.println("Warning! Invalid data in the database! There are more than one recordings in progress!");
         } else {
-            Recording activeRecording = find.findActiveRecording(activityList);
+            Recording activeRecording = activityList.findActiveRecording();
             System.out.println("\nThe details of the active recording are:\n\n" + activeRecording.toString());
         }
     }
@@ -225,7 +223,7 @@ public class MainMenu {
     private void runStopRecording() {
         System.out.println("\n** Stop recording **\n");
         try {
-            Recording finishedRecord = find.findActiveRecording(activityList);
+            Recording finishedRecord = activityList.findActiveRecording();
             stop.stopRecording(finishedRecord);
             System.out.println(stop.printStopMessage(finishedRecord));
         } catch (IllegalArgumentException iae) {

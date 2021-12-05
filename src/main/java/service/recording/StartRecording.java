@@ -3,16 +3,13 @@ package service.recording;
 import datamanagement.data.activity.Activity;
 import datamanagement.data.activity.ActivityList;
 import datamanagement.data.recording.Recording;
-import datamanagement.queries.FindRecordings;
 
 import java.time.LocalDateTime;
 
 public class StartRecording {
 
-    FindRecordings find = new FindRecordings();
-
     public void startRecording(String description, ActivityList activityList, Activity activity) {
-        if (find.numberOfActiveRecording(activityList) > 0) {
+        if (activityList.numberOfActiveRecording() > 0) {
             throw new IllegalStateException("Active recording running! Try to stop it before start another!");
         }
         int identifier = createIdentifier(activityList);

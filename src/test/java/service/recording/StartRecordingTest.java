@@ -42,7 +42,8 @@ class StartRecordingTest {
     @Test
     void startRecordingInProgressTest() {
         start.startRecording("morning commute", activityList, activityList.findActivity("Work"));
-        IllegalStateException ise = assertThrows(IllegalStateException.class, () -> start.startRecording("jogging", activityList, activityList.findActivity("Sport")));
+        Activity sport = activityList.findActivity("Sport");
+        IllegalStateException ise = assertThrows(IllegalStateException.class, () -> start.startRecording("jogging", activityList, sport));
         assertEquals("Active recording running! Try to stop it before start another!", ise.getMessage());
     }
 

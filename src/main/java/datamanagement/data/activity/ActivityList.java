@@ -1,5 +1,7 @@
 package datamanagement.data.activity;
 
+import datamanagement.data.recording.Recording;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class ActivityList {
         }
         throw new IllegalArgumentException("Unknown or empty activity: '" + activityName + "'!");
     }
+
     public Activity findActivity (int index) {
         for (Activity activity : activities) {
             if (index == activity.getIdentifier()) {
@@ -58,5 +61,41 @@ public class ActivityList {
             }
         }
         return max;
+    }
+
+    public Recording findActiveRecording() {
+        List<Recording> list = getAllRecordings();
+        Recording activeRecording = null;
+        if (numberOfActiveRecording() == 0) {
+            throw new IllegalArgumentException("No active recording in the list!");
+        } else if (numberOfActiveRecording() > 1) {
+            throw new IllegalArgumentException(("Invalid list, " + numberOfActiveRecording() + " active records in the list!"));
+        } else {
+            for (Recording recording : list) {
+                if (recording.isActive()) {
+                    activeRecording = recording;
+                }
+            }
+        }
+        return activeRecording;
+    }
+
+    public int numberOfActiveRecording() {
+        List<Recording> list = getAllRecordings();
+        int count = 0;
+        for (Recording recording : list) {
+            if (recording.isActive()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public List<Recording> getAllRecordings() {
+        List<Recording> allRecordings = new ArrayList<>();
+        for (Activity activity : this.activities) {
+            allRecordings.addAll(activity.getRecordings());
+        }
+        return allRecordings;
     }
 }
