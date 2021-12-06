@@ -61,7 +61,7 @@ public class Activity {
     }
 
     public String printActivityToMenu() {
-        return identifier + ": " + name + ", desc.: " + description + "\nnotes: " + notes;
+        return identifier + ": " + name + ", desc.: " + createBlankStringIfNull(description) + "\nnotes: " + createBlankStringIfNull(notes) + "\n";
     }
 
     public int getMaxRecordingIdentifier() {

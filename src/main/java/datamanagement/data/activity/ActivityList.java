@@ -98,4 +98,18 @@ public class ActivityList {
         }
         return allRecordings;
     }
+
+    public String printStatus() {
+        int numberOfRecordings = getAllRecordings().size();
+        int numberOfActivities = activities.size();
+        return "\nThere are " + numberOfRecordings + " recordings, " + numberOfActivities + " activities in the database.\n";
+    }
+
+    public StringBuilder printExistingActivities() {
+        StringBuilder stringOfActivities = new StringBuilder("\nExisting activities:\n");
+        for (Activity actual : activities) {
+            stringOfActivities.append(actual.printActivityToMenu());
+        }
+        return stringOfActivities;
+    }
 }

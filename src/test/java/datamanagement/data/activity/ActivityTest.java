@@ -42,21 +42,21 @@ class ActivityTest {
     @Test
     void printActivityToMenuTest() {
         Activity activity = new Activity(1, "Sport", "jogging, hiking, swimming, etc", "test");
-        String expectedString = "1: Sport, desc.: jogging, hiking, swimming, etc\nnotes: test";
+        String expectedString = "1: Sport, desc.: jogging, hiking, swimming, etc\nnotes: test\n";
         assertEquals(expectedString, activity.printActivityToMenu());
     }
 
     @Test
     void printActivityToMenuEmptyFieldsTest() {
         Activity activity = new Activity(1, "Sport", "", "");
-        String expectedString = "1: Sport, desc.: \nnotes: ";
+        String expectedString = "1: Sport, desc.: \nnotes: \n";
         assertEquals(expectedString, activity.printActivityToMenu());
     }
 
     @Test
     void printActivityToMenuNullFieldsTest() {
         Activity activity = new Activity(1, "Sport");
-        String expectedString = "1: Sport, desc.: null\nnotes: null";
+        String expectedString = "1: Sport, desc.: \nnotes: \n";
         assertEquals(expectedString, activity.printActivityToMenu());
     }
 

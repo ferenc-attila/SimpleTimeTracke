@@ -40,14 +40,6 @@ class StartRecordingTest {
     }
 
     @Test
-    void startRecordingInProgressTest() {
-        start.startRecording("morning commute", activityList, activityList.findActivity("Work"));
-        Activity sport = activityList.findActivity("Sport");
-        IllegalStateException ise = assertThrows(IllegalStateException.class, () -> start.startRecording("jogging", activityList, sport));
-        assertEquals("Active recording running! Try to stop it before start another!", ise.getMessage());
-    }
-
-    @Test
     void createIdentifierMaxIdNotInTheEndOfListTest() {
         activityList.getActivities().get(0).addRecording(new Recording(3, "evening commute", activityList.getActivities().get(3), LocalDateTime.now()));
         activityList.getActivities().get(0).addRecording(new Recording(4, "project planning", activityList.getActivities().get(0), LocalDateTime.now().minusDays(5)));
@@ -67,34 +59,5 @@ class StartRecordingTest {
 
         assertEquals("travel to conference", activityList.getActivities().get(0).getRecordings().get(5).getDescription());
         assertEquals(6, activityList.getActivities().get(0).getRecordings().get(5).getIdentifier());
-    }
-
-    @Test
-    void printStartMessageTest() {
-        start.startRecording("morning commute", activityList, activityList.getActivities().get(0));
-        String testStartTime = LocalDateTime.now().getYear() + "-" +
-                getTwoDigitTimeValue(LocalDateTime.now().getMonthValue()) + "-" +
-                getTwoDigitTimeValue(LocalDateTime.now().getDayOfMonth()) + " " +
-                getTwoDigitTimeValue(LocalDateTime.now().getHour()) + ":" +
-                getTwoDigitTimeValue(LocalDateTime.now().getMinute());
-        String expectedString = "Recording started with parameters below:" +
-                "\nId.: 0" +
-                "\nDescription: morning commute" +
-                "\nActivity: Work" +
-                "\nStart time: " +
-                testStartTime +
-                "\nEnd time: " +
-                "\nIn progress: yes" +
-                "\nNotes: null";
-
-        assertEquals(expectedString, start.printStartMessage(activityList.getActivities().get(0).getRecordings().get(0)).toString());
-    }
-
-    private String getTwoDigitTimeValue(int timeValue) {
-        if (timeValue < 10) {
-            return "0" + timeValue;
-        } else {
-            return String.valueOf(timeValue);
-        }
     }
 }

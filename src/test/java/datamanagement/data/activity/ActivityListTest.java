@@ -13,7 +13,7 @@ class ActivityListTest {
     ActivityList activityList = new ActivityList();
 
     @BeforeEach
-    void init () {
+    void init() {
         activityList.addActivity(new Activity(0, "Test"));
     }
 
@@ -150,5 +150,24 @@ class ActivityListTest {
         assertEquals(1, activityList.numberOfActiveRecording());
         test.getRecordings().get(3).finishRecording(LocalDateTime.now());
         assertEquals(0, activityList.numberOfActiveRecording());
+    }
+
+    @Test
+    void printStatusTest() {
+        Activity test = new Activity(0, "Test2");
+        activityList.addActivity(test);
+        test.addRecording(new Recording(1, "running", test, LocalDateTime.now()));
+        test.addRecording(new Recording(2, "running", test, LocalDateTime.now()));
+        test.addRecording(new Recording(3, "running", test, LocalDateTime.now()));
+        test.addRecording(new Recording(4, "running", test, LocalDateTime.now()));
+        assertEquals("\nThere are 4 recordings, 2 activities in the database.\n", activityList.printStatus());
+    }
+
+    @Test
+    void printExistingActivitiesTest() {
+        Activity test = new Activity(1, "Test2", "For testing", "some notes");
+        activityList.addActivity(test);
+        String expected = "\nExisting activities:\n0: Test, desc.: \nnotes: \n1: Test2, desc.: For testing\nnotes: some notes\n";
+        assertEquals(expected, activityList.printExistingActivities().toString());
     }
 }

@@ -14,14 +14,25 @@ class ReadTextFileTest {
     ReadTextFile read = new ReadTextFile();
 
     @Test
-    void readTextValidFileTest() {
+    void readTextValidRecordingsFileTest() {
         List<String> fileContent = read.readTextFile(Paths.get("src/test/resources/recordings.csv"));
-        assertEquals("identifier;description;isActive;start time;end time;notes;activityId", fileContent.get(0));
-        assertEquals("9;;false;2021-05-15 09:40;2021-05-15 08:10;kitchen cleaning;4", fileContent.get(10));
+        assertEquals("identifier;description;activity;isActive;start time;end time;notes", fileContent.get(0));
+        assertEquals("4;Northern Loon twitch;Hobbies;false;2021-08-12 19:30;2021-08-12 07:10;the bird was founded", fileContent.get(3));
+        String[] row = fileContent.get(1).split(";", -1);
+        assertEquals("0", row[0]);
+        assertEquals("", row[5]);
+        assertFalse(Boolean.parseBoolean(row[3]));
+    }
+
+    @Test
+    void readTextValidActivityFileTest() {
+        List<String> fileContent = read.readTextFile(Paths.get("src/test/resources/activities.csv"));
+        assertEquals("identifier;name;description;notes", fileContent.get(0));
+        assertEquals("1;Other;everything else;new activities will add later", fileContent.get(4));
         String[] row = fileContent.get(2).split(";", -1);
-        assertEquals("1", row[0]);
+        assertEquals("0", row[0]);
         assertEquals("", row[3]);
-        assertTrue(Boolean.parseBoolean(row[2]));
+        assertEquals("Birdwatching", (row[1]));
     }
 
     @Test
