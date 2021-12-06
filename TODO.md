@@ -3,8 +3,7 @@
 Write missing unit tests (for menu classes).  
 Refactoring  
 Exception handling.  
-Update and delete data.  
-Constructor overloading in data classes (solved partially).  
+Update and delete data.
 Introduce Activity and Categories classes (activity introduced).  
 Data validations:
  - Verify that the IDs are unique (solved).
